@@ -1,15 +1,5 @@
-var nicks = '',
-    nick,
-    proceed = true;
-
-while (proceed) {
-    nick = prompt('Entrez un prénom :');
-
-    if (nick) {
-        nicks += nick + ' '; // Ajoute le nouveau prénom ainsi qu'une espace juste après
-    } else {
-        proceed = false; // Aucun prénom n'a été entré, donc on fait en sorte d'invalider la condition
-    }
-}
-
-alert(nicks); // Affiche les prénoms à la suite
+var articlesElt = document.getElementById("demo");
+ajaxGet("https://blockchain.info/fr/rawtx", function (reponse) {
+    var jsonPretty = JSON.stringify(JSON.parse(reponse),null,2);
+    document.getElementById("demo").innerHTML = jsonPretty;
+});

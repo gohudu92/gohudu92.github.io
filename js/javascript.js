@@ -1,15 +1,41 @@
-var articlesElt = document.getElementById("requete1");
+//var articlesElt = document.getElementById("requete1");
 /*ajaxGet("https://api.blockcypher.com/v1/btc/main", function (reponse) {
     var jsonPretty = JSON.stringify(JSON.parse(reponse),null,2);
     document.getElementById("requete1").innerHTML = jsonPretty;
 });*/
 
+function ajaxGet(url, callback) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+            // Appelle la fonction callback en lui passant la réponse de la requête
+            callback(req.responseText);
+        } else {
+            console.error(req.status + " " + req.statusText + " " + url);
+        }
+    });
+    req.addEventListener("error", function () {
+        console.error("Erreur réseau avec l'URL " + url);
+    });
+    req.send(null);
+}
+
 function recupererRequeteAPI(url,where){
-    ajaxGet(url, function (reponse) {
-        var jsonPretty = JSON.stringify(JSON.parse(reponse),null,2);
+    ajaxGet(url, function (response) {
+        var jsonPretty = JSON.stringify(JSON.parse(response),null,2);
         document.getElementById(where).innerHTML = syntaxHighlight(jsonPretty);
     });
 }
+
+function Recherche(){
+    var url = document.getElementById("exampleInputAmount").value
+    ajaxGet("http://bitcoin.mubiz.com/address/" + url + "/",function (response) {
+        var jsonPretty = JSON.stringify(JSON.parse(response),null,2);
+        document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
+    })
+}
+
 
 recupererRequeteAPI("http://bitcoin.mubiz.com/blockchaininfo","requete1")
 recupererRequeteAPI("http://bitcoin.mubiz.com/mininginfo","requete2")
@@ -37,3 +63,4 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
+

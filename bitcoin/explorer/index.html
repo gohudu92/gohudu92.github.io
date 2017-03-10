@@ -4,11 +4,14 @@
     <title>IF - gohudu92 - Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <script src="../../js/javascript.js"></script>
+    <script src="../../js/ajax.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
 
 
 
@@ -52,8 +55,27 @@
 </nav>
 
 
-<center><h1>Bienvenue sur IF - gohudu92</h1></center>
-<center><p class ="lead">Ce site vous permettra bientôt de consulter beaucoup de requêtes du site <a href="https://blockchain.info/fr" >blockchain.info</a>.</p></center>
+<form class="form-inline">
+    <div class="form-group">
+        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+        <div id="explorer" class="input-group">
+            <div class="input-group-addon">Ƀ</div>
+            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Recherche">
+            <div class="input-group-addon">Ƀ</div>
+        </div>
+    </div>
+    <button onclick="Recherche()" type="submit" class="btn btn-primary">C'est parti !</button>
+</form>
+
+<center><div class="row">
+    <p>Requête pour obtenir votre recherche : "http://bitcoin.mubiz.com/blockchaininfo"</p>
+    <div class="col-lg-12 col-xs-6">
+        <pre id="row2" >
+        	<code id="where" class="json kljs"></code>
+    	</pre>
+    </div>
+</div></center>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- <script src="js/bootstrap.min.js"></script> -->
 </body>

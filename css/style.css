@@ -10,3 +10,12 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     max-width: 50%;
 }
 
+#row2{
+    max-height: 200px;
+    max-width: 50%;
+}
+
+#explorer{
+    margin-left: 50px;
+}
+

@@ -1,9 +1,6 @@
-//var articlesElt = document.getElementById("requete1");
-/*ajaxGet("https://api.blockcypher.com/v1/btc/main", function (reponse) {
-    var jsonPretty = JSON.stringify(JSON.parse(reponse),null,2);
-    document.getElementById("requete1").innerHTML = jsonPretty;
-});*/
-
+/**
+ * Created by Hugo on 10/03/2017.
+ */
 function ajaxGet(url, callback) {
     var req = new XMLHttpRequest();
     req.open("GET", url);
@@ -21,20 +18,16 @@ function ajaxGet(url, callback) {
     req.send(null);
 }
 
-function recupererRequeteAPI(url,where){
-    ajaxGet(url, function (response) {
+function Recherche(){
+    var url = document.getElementById("exampleInputAmount").value
+    var az = "http://bitcoin.mubiz.com/address/" + url + "/"
+    alert('Select : '+url)
+    ajaxGet(az, function (response) {
+        alert("yo")
         var jsonPretty = JSON.stringify(JSON.parse(response),null,2);
-        document.getElementById(where).innerHTML = syntaxHighlight(jsonPretty);
-    });
+        document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
+    })
 }
-
-
-
-
-recupererRequeteAPI("http://bitcoin.mubiz.com/blockchaininfo","requete1")
-recupererRequeteAPI("http://bitcoin.mubiz.com/mininginfo","requete2")
-recupererRequeteAPI("http://bitcoin.mubiz.com/peerinfo","requete3")
-
 
 function syntaxHighlight(json) {
     if (typeof json != 'string') {
@@ -57,4 +50,3 @@ function syntaxHighlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
-

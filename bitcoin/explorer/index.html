@@ -3,15 +3,25 @@
 <head>
     <title>IF - gohudu92 - Home Page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../css/style.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="../../js/javascript.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="../../js/javascriptExplorer.js"></script>
     <script src="../../js/ajax.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>-->
+
 
 
 
@@ -71,13 +81,33 @@
     $(document).ready(function () {
         $("#az").click(function(){
             var valeur = $("#exampleInputAmount").val()
-            if(valeur == null){
+
+            if(valeur == ""){
                 alert("Veuillez rentrer une valeur")
             }
+
             else{
-                var v = valeur.toString()
-                var jsonPretty = JSON.stringify(JSON.parse(v),null,2);
-                document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
+                var v = valeur
+                console.log("https://bitcoin.mubiz.com/block_hash/"+v+"/")
+//                $.get( "https://bitcoin.mubiz.com/address/"+v+"/" )
+//                    .done(function( data ) {
+//                        alert( "Data Loaded: "  );
+//                    },"json").fail(function () {
+//                    alert("error")
+//                });
+                $.ajax({type : "GET",
+                    url: "https://bitcoin.mubiz.com/block_hash/"+v+"/",
+                    success: function(result){
+                    ("#where").innerHTML=result
+                    console.log(result)
+                },error: function(xhr, status, error) {
+                    console.log(xhr)
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err);
+                }});
+
+                //var jsonPretty = JSON.stringify(JSON.parse(v),null,2);
+                //document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
             }
 
         })
@@ -88,7 +118,7 @@
     <p>Requête pour obtenir votre recherche : "http://bitcoin.mubiz.com/blockchaininfo"</p>
     <div class="col-lg-12 col-xs-6">
         <pre id="row2" >
-        	<code id="where" class="json kljs"></code>
+        	<code id="requete1" class="json kljs"></code>
     	</pre>
     </div>
 </div></center>

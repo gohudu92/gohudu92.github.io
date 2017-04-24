@@ -6,7 +6,7 @@
 
 function ajaxGet(url, callback) {
     var req = new XMLHttpRequest();
-    req.open("GET", url);
+    req.open("GET", url, true);
     req.addEventListener("load", function () {
         if (req.status >= 200 && req.status < 400) {
             // Appelle la fonction callback en lui passant la réponse de la requête
@@ -15,8 +15,10 @@ function ajaxGet(url, callback) {
             console.error(req.status + " " + req.statusText + " " + url);
         }
     });
+    console.log(url)
     req.addEventListener("error", function () {
         console.error("Erreur réseau avec l'URL " + url);
+
     });
     req.send(null);
 }
@@ -31,9 +33,9 @@ function recupererRequeteAPI(url,where){
 
 
 
-recupererRequeteAPI("http://bitcoin.mubiz.com/blockchaininfo","requete1")
-recupererRequeteAPI("http://bitcoin.mubiz.com/mininginfo","requete2")
-recupererRequeteAPI("http://bitcoin.mubiz.com/peerinfo","requete3")
+recupererRequeteAPI("https://bitcoin.mubiz.com/blockchaininfo","requete1")
+recupererRequeteAPI("https://bitcoin.mubiz.com/mininginfo","requete2")
+recupererRequeteAPI("https://bitcoin.mubiz.com/peerinfo","requete3")
 
 
 function syntaxHighlight(json) {

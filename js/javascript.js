@@ -33,8 +33,8 @@ function recupererRequeteAPI(url,where){
 
 
 
-recupererRequeteAPI("https://bitcoin.mubiz.com/blockchaininfo","requete1")
-recupererRequeteAPI("https://bitcoin.mubiz.com/mininginfo","requete2")
+recupererRequeteAPI("https://api.blockchain.info/stats?cors=true","requete1")
+recupererRequeteAPI("https://api.blockchain.info/pools?cors=true","requete2")
 recupererRequeteAPI("https://bitcoin.mubiz.com/peerinfo","requete3")
 
 

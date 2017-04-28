@@ -78,47 +78,38 @@
 </form>
 
 <script>
-    $(document).ready(function () {
-        $("#az").click(function(){
-            var valeur = $("#exampleInputAmount").val()
-
-            if(valeur == ""){
-                alert("Veuillez rentrer une valeur")
-            }
-
-            else{
-                var v = valeur
-                console.log("https://bitcoin.mubiz.com/block_hash/"+v+"/")
-//                $.get( "https://bitcoin.mubiz.com/address/"+v+"/" )
+//    $(document).ready(function () {
+ //       $("#az").click(function(){
+  //          var valeur = $("#exampleInputAmount").val()
+//
+//            if(valeur == ""){
+//                alert("Veuillez rentrer une valeur")
+//            }
+//
+//            else{
+//                var v = valeur
+//                console.log("https://blockchain.info/fr/rawblock/"+v+"cors=true")
+//                $.get( "https://blockchain.info/fr/rawblock/"+v+"cors=true" )
 //                    .done(function( data ) {
-//                        alert( "Data Loaded: "  );
-//                    },"json").fail(function () {
-//                    alert("error")
-//                });
-                $.ajax({type : "GET",
-                    url: "https://bitcoin.mubiz.com/block_hash/"+v+"/",
-                    success: function(result){
-                    ("#where").innerHTML=result
-                    console.log(result)
-                },error: function(xhr, status, error) {
-                    console.log(xhr)
-                    var err = eval("(" + xhr.responseText + ")");
-                    alert(err);
-                }});
+//                       alert( "Data Loaded: "  );
+//                   },"json").fail(function () {
+ //                 alert("error")
+ //            });
+
 
                 //var jsonPretty = JSON.stringify(JSON.parse(v),null,2);
                 //document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
-            }
+//            }
 
-        })
-    })
+//        })
+ //   })
 </script>
 
 <center><div class="row">
     <p>Requête pour obtenir votre recherche : "http://bitcoin.mubiz.com/blockchaininfo"</p>
     <div class="col-lg-12 col-xs-6">
         <pre id="row2" >
-        	<code id="requete1" class="json kljs"></code>
+        	<code id="where" class="json kljs"></code>
     	</pre>
     </div>
 </div></center>

@@ -8,6 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 
 
@@ -73,7 +74,7 @@ xmlhttp.open("GET", "https://api.blockcypher.com/v1/btc/main/blocks/000000000000
 xmlhttp.send();
 </script>-->
     <center><div class="row">
-        <p>Requête pour obtenir "WS/blockchaininfo" : "http://bitcoin.mubiz.com/blockchaininfo"</p>
+        <p>Requête pour obtenir des informations sur la blockchain : "https://api.blockchain.info/stats"</p>
       <div class="col-lg-12 col-xs-6">
         <pre id="row" >
         	<code id="requete1" class="json kljs"></code>
@@ -81,7 +82,7 @@ xmlhttp.send();
       </div>
     </div>
     <div class="row">
-        <p>Requête pour obtenir "WS/mininginfo" : "http://bitcoin.mubiz.com/mininginfo"</p>
+        <p>Requête pour obtenir les meilleurs mineurs des 4 derniers jours : "https://api.blockchain.info/pools"</p>
         <div class="col-lg-12 col-xs-6">
             <pre id="row" >
           	<code id="requete2" class="json kljs"></code>

@@ -13,7 +13,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script src="../../js/javascript.js"></script>
+
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,45 +64,137 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-
-<form class="form-inline">
-    <div class="form-group">
-        <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-        <div id="explorer" class="input-group">
-            <div class="input-group-addon">Ƀ</div>
-            <input type="text" class="form-control" id="exampleInputAmount" placeholder="Recherche">
-            <div class="input-group-addon">Ƀ</div>
-        </div>
-    </div>
-    <button id="az" class="btn btn-primary">C'est parti !</button>
-</form>
-
-<script>
-//    $(document).ready(function () {
- //       $("#az").click(function(){
-  //          var valeur = $("#exampleInputAmount").val()
-//
-//            if(valeur == ""){
-//                alert("Veuillez rentrer une valeur")
-//            }
-//
-//            else{
-//                var v = valeur
-//                console.log("https://blockchain.info/fr/rawblock/"+v+"cors=true")
-//                $.get( "https://blockchain.info/fr/rawblock/"+v+"cors=true" )
-//                    .done(function( data ) {
-//                       alert( "Data Loaded: "  );
-//                   },"json").fail(function () {
- //                 alert("error")
- //            });
+<h2 id="acentrer">Sur cette page vous pouvez chercher les transactions grace à leur hashcode et leur index ou encore explorer des blocks grâce à leur hashcode ou leur index</h2>
 
 
-                //var jsonPretty = JSON.stringify(JSON.parse(v),null,2);
-                //document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
-//            }
+<div id="acentrer">
+<FORM NAME="form2" id="f2">
+    Chercher une transaction grace à son hashcode ou son index <br />
+    <INPUT TYPE="text" NAME="input" VALUE=""><BR>
+    <INPUT TYPE="button" NAME="bouton" VALUE="Afficher" onClick="afficher(form2)"><BR>
 
-//        })
- //   })
+</FORM>
+</div>
+
+
+<div id="acentrer">
+    <FORM NAME="form3" id="f2">
+        Chercher un block grace à son hashcode <br />
+        <INPUT TYPE="text" NAME="input" VALUE=""><BR>
+        <INPUT TYPE="button" NAME="bouton" VALUE="Afficher" onClick="afficher(form3)"><BR>
+
+    </FORM>
+</div>
+
+
+<script language="JavaScript">
+            function afficher(form2) {
+                var monString = document.form2.input.value;
+                console.log(monString);
+                recupererRequeteAPI("https://blockchain.info/fr/rawtx/"+monString+"?cors=true","where");
+                /*var isAddress = /^[0-9a-zA-Z]{34}$/.test(monString);
+                console.log("https://blockchain.info/fr/rawtx/"+monString+"?cors=true")
+                if(monString == ""){
+                    alert("Veuillez rentrer une valeur")
+                }
+                else {
+                    var v = monString
+                    console.log("https://blockchain.info/fr/rawtx/"+v+"?cors=true")
+                    $.get( "https://blockchain.info/fr/rawtx/"+v+"?cors=true" )
+                        .done(function( data ) {
+                            alert( "Data Loaded: "  );
+                        },"json").fail(function () {
+                        alert("error")
+                    });
+
+                    var jsonPretty = JSON.stringify(JSON.parse(v),null,2);
+                    document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);*/
+
+            }
+
+            function afficher(form3) {
+                var monString = document.form3.input.value;
+                console.log(monString);
+                recupererRequeteAPI("https://blockchain.info/fr/rawblock/" + monString + "?cors=true", "where");
+            }
+
+            function recupererRequeteAPI(url,where){
+                ajaxGet(url, function (response) {
+                    var jsonPretty = JSON.stringify(JSON.parse(response),null,2);
+                    document.getElementById(where).innerHTML = syntaxHighlight(jsonPretty);
+                });
+            }
+
+
+            function ajaxGet(url, callback) {
+                var req = new XMLHttpRequest();
+                req.open("GET", url, true);
+                req.addEventListener("load", function () {
+                    if (req.status >= 200 && req.status < 400) {
+                        // Appelle la fonction callback en lui passant la réponse de la requête
+                        callback(req.responseText);
+                    } else {
+                        console.error(req.status + " " + req.statusText + " " + url);
+                    }
+                });
+                console.log(url)
+                req.addEventListener("error", function () {
+                    console.error("Erreur réseau avec l'URL " + url);
+
+                });
+                req.send(null);
+            }
+
+
+            function syntaxHighlight(json) {
+                if (typeof json != 'string') {
+                    json = JSON.stringify(json, undefined, 2);
+                }
+                json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                    var cls = 'number';
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) {
+                            cls = 'key';
+                        } else {
+                            cls = 'string';
+                        }
+                    } else if (/true|false/.test(match)) {
+                        cls = 'boolean';
+                    } else if (/null/.test(match)) {
+                        cls = 'null';
+                    }
+                    return '<span class="' + cls + '">' + match + '</span>';
+                });
+            }
+            /*myRealString = $("#exampleInputAmount").val()
+            var isAddress = /^[0-9a-zA-Z]{34}$/.test(myRealString);
+            console.log("https://blockchain.info/fr/rawblock/"+v+"?cors=true")
+
+            if(valeur == ""){
+                alert("Veuillez rentrer une valeur")
+            }
+
+            else if(myRealString){
+                var v = valeur
+                console.log("https://blockchain.info/fr/rawblock/"+v+"?cors=true")
+                $.get( "https://blockchain.info/fr/rawblock/"+v+"?cors=true" )
+                    .done(function( data ) {
+                       alert( "Data Loaded: "  );
+                   },"json").fail(function () {
+                  alert("error")
+             });
+
+
+                var jsonPretty = JSON.stringify(JSON.parse(v),null,2);
+                document.getElementById("where").innerHTML = syntaxHighlight(jsonPretty);
+            }
+            else{
+                alert("ERROR")
+            }
+
+        })
+    })*/
 </script>
 
 <center><div class="row">

@@ -36,6 +36,8 @@ function recupererRequeteAPI(url,where){
 recupererRequeteAPI("https://api.blockchain.info/stats?cors=true","requete1")
 recupererRequeteAPI("https://api.blockchain.info/pools?cors=true","requete2")
 recupererRequeteAPI("https://bitcoin.mubiz.com/peerinfo","requete3")
+recupererRequeteAPI("https://bitcoin.mubiz.com/mininginfo","requete4")
+recupererRequeteAPI("https://bitcoin.mubiz.com/blockchaininfo","requete5")
 
 
 function syntaxHighlight(json) {
